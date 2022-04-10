@@ -17,7 +17,7 @@ class AuthViewController: UIViewController {
     
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 1, green: 0.9770730784, blue: 0.9714993712, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -25,9 +25,10 @@ class AuthViewController: UIViewController {
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
-        imageView.backgroundColor = .clear
+        imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addShadowOnView()
         return imageView
     }()
     
@@ -57,23 +58,37 @@ class AuthViewController: UIViewController {
     private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = #colorLiteral(red: 0.800814867, green: 0.226603955, blue: 0.0949620679, alpha: 1)
-        button.setTitle("SignUP", for: .normal)
+        button.setTitle("REGISTER", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addShadowOnView()
         return button
     }()
     
     private lazy var signInButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .black
-        button.setTitle("SingIN", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8200874581)
+        button.setTitle("LOGIN", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addShadowOnView()
+        return button
+    }()
+    
+    private lazy var guestButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .clear
+        button.setTitle("Guest entrance", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
+        button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8200874581)
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(withoutRegTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -95,7 +110,7 @@ class AuthViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = .systemGroupedBackground
+        view.backgroundColor = .clear
         
         textFieldsStackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField],
                                           axis: .vertical,
@@ -113,6 +128,7 @@ class AuthViewController: UIViewController {
         backgroundView.addSubview(textFieldsStackView)
         backgroundView.addSubview(loginLabel)
         backgroundView.addSubview(buttonsStackView)
+        backgroundView.addSubview(guestButton)
     }
     
     private func setupDelegate() {
@@ -132,7 +148,7 @@ class AuthViewController: UIViewController {
         let user = findUserDataBase(email: email)
         
         if user == nil {
-            loginLabel.text = "User no found"
+            loginLabel.text = "User not found"
             loginLabel.textColor = .systemRed
         } else if user?.password == password {
             let navVC = UINavigationController(rootViewController: AlbumsViewController())
@@ -145,7 +161,12 @@ class AuthViewController: UIViewController {
             loginLabel.text = "Wrong password"
             loginLabel.textColor = .systemRed
         }
-        
+    }
+    
+    @objc private func withoutRegTapped() {
+        let navVC = UINavigationController(rootViewController: AlbumsViewController())
+        navVC.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true)
     }
     
     private func findUserDataBase(email: String) -> User? {
@@ -200,7 +221,6 @@ extension AuthViewController: UITextFieldDelegate {
         passwordTextField.resignFirstResponder()
         return true
     }
-    
 }
 
 //MARK: - SetConstraints
@@ -225,9 +245,9 @@ extension AuthViewController {
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            logoImageView.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -30),
-            logoImageView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor, multiplier: 0.8),
-            logoImageView.heightAnchor.constraint(equalTo: backgroundView.heightAnchor, multiplier: 0.2)
+            logoImageView.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -35),
+            logoImageView.widthAnchor.constraint(equalToConstant: 300),
+            logoImageView.heightAnchor.constraint(equalToConstant: 300)
         ])
         
         NSLayoutConstraint.activate([
@@ -239,7 +259,7 @@ extension AuthViewController {
         
         NSLayoutConstraint.activate([
             loginLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            loginLabel.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -20)
+            loginLabel.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -5)
         ])
         
         NSLayoutConstraint.activate([
@@ -251,6 +271,13 @@ extension AuthViewController {
             buttonsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
             buttonsStackView.topAnchor.constraint(equalTo: textFieldsStackView.bottomAnchor, constant: 30),
             buttonsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            guestButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            guestButton.topAnchor.constraint(equalTo: buttonsStackView.bottomAnchor, constant: 30),
+            guestButton.heightAnchor.constraint(equalToConstant: 30),
+            guestButton.widthAnchor.constraint(equalTo: signUpButton.widthAnchor)
         ])
     }
 }

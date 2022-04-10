@@ -17,7 +17,7 @@ class SignUpViewController: UIViewController {
     
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 1, green: 0.9770730784, blue: 0.9714993712, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -120,14 +120,26 @@ class SignUpViewController: UIViewController {
     private lazy var signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = #colorLiteral(red: 0.800814867, green: 0.226603955, blue: 0.0949620679, alpha: 1)
-        button.setTitle("SignUP", for: .normal)
+        button.setTitle("SAVE", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16.0)
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addShadowOnView()
         return button
     }()
+    
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "logo")
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.alpha = 0.1
+        return imageView
+    }()
+    
     
     private var elementsStackView = UIStackView()
     private let datePicker = UIDatePicker()
@@ -145,16 +157,16 @@ class SignUpViewController: UIViewController {
         setupDataPicker()
         registerKeyboardNotification()
     }
-
+    
     deinit {
         removeKeyBoardNotification()
     }
     
     private func setupViews() {
-        //title = "SignUp"
-
+        
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
+        scrollView.addSubview(logoImageView)
         
         elementsStackView = UIStackView(arrangedSubviews: [firstNameTextField,
                                                            firstNameValidLabel,
@@ -195,7 +207,7 @@ class SignUpViewController: UIViewController {
     }
     
     @objc private func signUpButtonTapped() {
-       
+        
         let firstNameText = firstNameTextField.text ?? ""
         let secondNameText = secondNameTextField.text ?? ""
         let emailText = emailTextField.text ?? ""
@@ -216,7 +228,6 @@ class SignUpViewController: UIViewController {
             loginLabel.text = "REGISTRATION"
             loginLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
             alertOk(title: "Error", message: "Fill in all fields and your age must be 18+ y.o.")
-            
         }
     }
     
@@ -264,10 +275,10 @@ class SignUpViewController: UIViewController {
         if result.count == 18 {
             phoneValidLabel.text = "Phone is valid"
             phoneValidLabel.textColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
-    } else {
-        phoneValidLabel.text = "Phone is not valid"
-        phoneValidLabel.textColor = #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
-    }
+        } else {
+            phoneValidLabel.text = "Phone is not valid"
+            phoneValidLabel.textColor = #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
+        }
         return result
     }
     
@@ -299,26 +310,26 @@ extension SignUpViewController: UITextFieldDelegate {
                                               string: string,
                                               range: range)
         case secondNameTextField: setTextField(textField: secondNameTextField,
-                                              label: secondNameValidLabel,
-                                              validType: nameValueType,
-                                              validMessage: "Name is valid",
-                                              wrongMessage: "Only 'A-Z' characters, min. 1 character",
-                                              string: string,
-                                              range: range)
+                                               label: secondNameValidLabel,
+                                               validType: nameValueType,
+                                               validMessage: "Name is valid",
+                                               wrongMessage: "Only 'A-Z' characters, min. 1 character",
+                                               string: string,
+                                               range: range)
         case emailTextField: setTextField(textField: emailTextField,
-                                              label: emailValidLabel,
-                                              validType: emailValueType,
-                                              validMessage: "Email is valid",
-                                              wrongMessage: "Email is not valid",
-                                              string: string,
-                                              range: range)
+                                          label: emailValidLabel,
+                                          validType: emailValueType,
+                                          validMessage: "Email is valid",
+                                          wrongMessage: "Email is not valid",
+                                          string: string,
+                                          range: range)
         case passwordTextField: setTextField(textField: passwordTextField,
-                                              label: passwordValidLabel,
-                                              validType: passwordlValueType,
-                                              validMessage: "Password is valid",
-                                              wrongMessage: "Password is not valid",
-                                              string: string,
-                                              range: range)
+                                             label: passwordValidLabel,
+                                             validType: passwordlValueType,
+                                             validMessage: "Password is valid",
+                                             wrongMessage: "Password is not valid",
+                                             string: string,
+                                             range: range)
         case phoneNumberTextField: phoneNumberTextField.text = setPhoneNumberMask(textField: phoneNumberTextField,
                                                                                   mask: "+X (XXX) XXX-XX-XX",
                                                                                   string: string,
@@ -408,6 +419,13 @@ extension SignUpViewController {
             signUpButton.topAnchor.constraint(equalTo: elementsStackView.bottomAnchor, constant: -15),
             signUpButton.heightAnchor.constraint(equalToConstant: 40),
             signUpButton.widthAnchor.constraint(equalToConstant: 300)
+        ])
+        
+        NSLayoutConstraint.activate([
+            logoImageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            logoImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9),
+            logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
         ])
     }
 }

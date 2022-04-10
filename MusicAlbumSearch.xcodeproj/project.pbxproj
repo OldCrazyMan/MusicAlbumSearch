@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C0DF1E4280319FD007A4414 /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0DF1E3280319FD007A4414 /* UIView + Extensions.swift */; };
 		4C9667E727F9F631002AE09C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9667E627F9F631002AE09C /* AppDelegate.swift */; };
 		4C9667E927F9F631002AE09C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9667E827F9F631002AE09C /* SceneDelegate.swift */; };
 		4C9667EB27F9F631002AE09C /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9667EA27F9F631002AE09C /* AuthViewController.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C0DF1E3280319FD007A4414 /* UIView + Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		4C9667E327F9F631002AE09C /* MusicAlbumSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicAlbumSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C9667E627F9F631002AE09C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C9667E827F9F631002AE09C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,9 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				4C96680227F9F7AC002AE09C /* UserModel.swift */,
-				4C96680427F9F7C4002AE09C /* AlertOK.swift */,
 				4C96680627F9F7DA002AE09C /* AlbumModel.swift */,
 				4C96680827F9F7EC002AE09C /* SongModel.swift */,
+				4C96680427F9F7C4002AE09C /* AlertOK.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				4C96681E27F9FF2E002AE09C /* UIStackView + Extension.swift */,
+				4C0DF1E3280319FD007A4414 /* UIView + Extensions.swift */,
 				4C96682027F9FF4A002AE09C /* UIViewController + Extension.swift */,
 			);
 			path = UIKit;
@@ -254,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C0DF1E4280319FD007A4414 /* UIView + Extensions.swift in Sources */,
 				4C9667EB27F9F631002AE09C /* AuthViewController.swift in Sources */,
 				4C96681327F9F8A7002AE09C /* DetailAlbumViewController.swift in Sources */,
 				4C96680727F9F7DA002AE09C /* AlbumModel.swift in Sources */,

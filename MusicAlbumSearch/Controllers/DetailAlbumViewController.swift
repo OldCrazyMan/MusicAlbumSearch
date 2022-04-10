@@ -20,6 +20,7 @@ class DetailAlbumViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "Name album"
+        label.font = UIFont.systemFont(ofSize: 25)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -27,6 +28,7 @@ class DetailAlbumViewController: UIViewController {
     private let artistNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name artist"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -49,7 +51,7 @@ class DetailAlbumViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 5
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .clear
         collectionView.bounces = false
         collectionView.register(SongsCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +74,7 @@ class DetailAlbumViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 1, green: 0.9770730784, blue: 0.9714993712, alpha: 1)
         view.addSubview(albumLogo)
         
         stackView = UIStackView(arrangedSubviews: [albumNameLabel,
@@ -85,6 +87,7 @@ class DetailAlbumViewController: UIViewController {
         
         view.addSubview(stackView)
         view.addSubview(collectionView)
+      
     }
     
     private func setDelegate() {
@@ -97,8 +100,8 @@ class DetailAlbumViewController: UIViewController {
         guard let album = album else { return }
         albumNameLabel.text = album.collectionName
         artistNameLabel.text = album.artistName
-        trackCountLabel.text = "\(album.trackCount) track"
-        releaseDateLabel.text = setDateFormat(date: album.releaseDate)
+        trackCountLabel.text = "\(album.trackCount) track:"
+        releaseDateLabel.text = "Release: \(setDateFormat(date: album.releaseDate))"
         
         guard let url = album.artworkUrl100 else { return }
         setImage(urlString: url, image: albumLogo)
@@ -182,23 +185,24 @@ extension DetailAlbumViewController {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            albumLogo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            albumLogo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            albumLogo.heightAnchor.constraint(equalToConstant: 100),
-            albumLogo.widthAnchor.constraint(equalToConstant: 100)
+            albumLogo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            albumLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            albumLogo.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2),
+            albumLogo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4)
         ])
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            stackView.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: 20),
+            stackView.topAnchor.constraint(equalTo: albumLogo.bottomAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 0),
-            collectionView.leadingAnchor.constraint(equalTo: albumLogo.trailingAnchor, constant: 17),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 2),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
+    
     }
 }

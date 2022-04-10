@@ -11,10 +11,20 @@ class AlbumsViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = #colorLiteral(red: 1, green: 0.9770730784, blue: 0.9714993712, alpha: 1)
         tableView.register(AlbumsTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    }()
+    
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "logo")
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.alpha = 0.1
+        return imageView
     }()
     
     private let searchController = UISearchController(searchResultsController: nil)
@@ -33,8 +43,9 @@ class AlbumsViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.9941603317, green: 0.9373638027, blue: 0.9284614988, alpha: 1)
         view.addSubview(tableView)
+        view.addSubview(logoImageView)
     }
     
     private func setupDelegate() {
@@ -49,8 +60,12 @@ class AlbumsViewController: UIViewController {
         
         navigationItem.searchController = searchController
         
-        let userInfoButton = createCustomButton(selector: #selector(userInfoButtonTapped))
+        let userInfoButton = createCustomButton(selector: #selector(userInfoButtonTapped), image: "person.fill", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8200874581))
+        let backButton = createCustomButton(selector: #selector(backButtonTapped), image: "arrowshape.turn.up.backward.fill", color: #colorLiteral(red: 0.7889301181, green: 0.2227648199, blue: 0.091022484, alpha: 1))
+        
         navigationItem.rightBarButtonItem = userInfoButton
+        navigationItem.leftBarButtonItem = backButton
+        
     }
     
     private func setupSearchController() {
@@ -87,7 +102,12 @@ class AlbumsViewController: UIViewController {
         let userInfoViewController = UserInfoViewController()
         navigationController?.pushViewController(userInfoViewController, animated: true)
     }
+    
+    @objc private func backButtonTapped() {
+        dismiss(animated: true, completion: nil)
+    }
 }
+
 
 //MARK: - UITableViewDataSource
 
@@ -130,7 +150,7 @@ extension AlbumsViewController: UISearchBarDelegate {
         
         if searchText != "" {
             timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.9, repeats: false, block: { [weak self] _ in
                 self?.fetchAlbums(albumName: text!)
             })
         }
@@ -149,6 +169,12 @@ extension AlbumsViewController {
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
+        
+        NSLayoutConstraint.activate([
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            logoImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.9),
+            logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
+        ])
     }
 }
-

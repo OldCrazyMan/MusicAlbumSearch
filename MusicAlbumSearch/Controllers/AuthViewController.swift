@@ -245,14 +245,14 @@ extension AuthViewController {
         
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            logoImageView.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -35),
-            logoImageView.widthAnchor.constraint(equalToConstant: 300),
-            logoImageView.heightAnchor.constraint(equalToConstant: 300)
+            logoImageView.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -33),
+            logoImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6)
         ])
         
         NSLayoutConstraint.activate([
             textFieldsStackView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            textFieldsStackView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            textFieldsStackView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -250),
             textFieldsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
             textFieldsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20)
         ])

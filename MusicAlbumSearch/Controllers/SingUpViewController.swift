@@ -183,6 +183,7 @@ class SignUpViewController: UIViewController {
                                         axis: .vertical,
                                         spacing: 10,
                                         distribution: .equalSpacing)
+        
         backgroundView.addSubview(elementsStackView)
         backgroundView.addSubview(loginLabel)
         backgroundView.addSubview(signUpButton)

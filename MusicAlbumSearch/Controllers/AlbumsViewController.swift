@@ -76,13 +76,10 @@ class AlbumsViewController: UIViewController {
     private func fetchAlbums(albumName: String) {
         
         let urlString = "https://itunes.apple.com/search?term=\(albumName)&entity=album&attribute=albumTerm"
-        
         NetworkDataFetch.shared.fetchAlbum(urlString: urlString) { albumModel, error in
-            
+
             if error == nil {
-                
-                guard let albumModel = albumModel else { return }
-                
+                guard let albumModel = albumModel else { return } 
                 if albumModel.results != [] {
                     let sortedAlbums = albumModel.results.sorted { firstItem, secondItem in
                         return firstItem.collectionName.compare(secondItem.collectionName) == ComparisonResult.orderedAscending

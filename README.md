@@ -2,9 +2,9 @@
 Mini-search engine for information about music albums.
 
 The project uses:
-Database - "UserDefaults",
-Json + "iTunes API",
-Code layout (without storyBoard).
++ Database - "UserDefaults",
++ Json + "iTunes API",
++ Code layout (without storyBoard).
 
 <img width="200" alt="Снимок экрана 2022-04-22 в 17 21 20" src="https://user-images.githubusercontent.com/95176430/167133085-3b4f066a-1422-41fe-8e34-ca563d8acf01.png"><img width="200" alt="Снимок экрана 2022-04-22 в 17 21 29" src="https://user-images.githubusercontent.com/95176430/167133123-472bc0e5-2e4c-4b91-aa55-e607d2f3ce1c.png">
 

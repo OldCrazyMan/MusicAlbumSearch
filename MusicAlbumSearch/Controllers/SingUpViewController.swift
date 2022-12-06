@@ -140,7 +140,6 @@ class SignUpViewController: UIViewController {
         return imageView
     }()
     
-    
     private var elementsStackView = UIStackView()
     private let datePicker = UIDatePicker()
     
@@ -156,6 +155,7 @@ class SignUpViewController: UIViewController {
         setupDelegate()
         setupDataPicker()
         registerKeyboardNotification()
+        addTaps()
     }
     
     deinit {
@@ -294,6 +294,23 @@ class SignUpViewController: UIViewController {
         return (ageUser < 18 ? false : true)
     }
     
+    private func addTaps() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapScreen)
+        
+        let swipeScreen = UISwipeGestureRecognizer(target: self, action: #selector(swipeHideKeyboard))
+        swipeScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(swipeScreen)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func swipeHideKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 //MARK: - UITextFieldDelegate
